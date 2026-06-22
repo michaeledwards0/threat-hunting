@@ -23,7 +23,7 @@ This page documents the threat hunting engagements and security operations work 
 
 ---
 
-### 🔴 Threat Hunt: Sudden Network Slowdowns — PowerShell LOLBin Investigation
+### 🔴 [Threat Hunt: Sudden Network Slowdowns — PowerShell LOLBin Investigation](./cases/network-slowdown-powershell.md)
 
 **Type:** Threat Hunt → Incident Response
 **Environment:** Cyber Range Lab — Windows Azure VM
