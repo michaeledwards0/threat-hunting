@@ -25,11 +25,9 @@ This page documents the threat hunting engagements and security operations work 
 
 ### 🔴 Threat Hunt: Sudden Network Slowdowns — PowerShell LOLBin Investigation
 
-Type: Threat Hunt → Incident Response
-
-Environment: Cyber Range Lab — Windows Azure VM
-
-Tools: KQL Microsoft Defender for Endpoint Log Analytics Workspaces
+**Type:** Threat Hunt → Incident Response
+**Environment:** Cyber Range Lab — Windows Azure VM
+**Tools:** KQL Microsoft Defender for Endpoint Log Analytics Workspaces
 
 A Windows VM exposed to the internet began showing unusual network behavior — high volumes of failed outbound connections with no obvious cause. What started as a network slowdown investigation uncovered suspicious PowerShell execution chains consistent with Living-off-the-Land (LOLBin) attacker tradecraft.
 
