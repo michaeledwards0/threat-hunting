@@ -31,7 +31,7 @@ This page documents the threat hunting engagements and security operations work 
 
 A Windows VM exposed to the internet began showing unusual network behavior — high volumes of failed outbound connections with no obvious cause. What started as a network slowdown investigation uncovered suspicious PowerShell execution chains consistent with Living-off-the-Land (LOLBin) attacker tradecraft.
 
-Key findings:
+**Key findings:**
 
 
 182+ failed outbound connections from a single host, mostly on TCP 80/443 — not scanning behavior, but unusual volume
@@ -43,21 +43,24 @@ Mapped to MITRE ATT&CK: T1059.001, T1562.001, T1105, T1046
 Outcome: No confirmed malware found on scan. Device isolated and flagged for reimaging. NSG rules hardened and detection rules created for PowerShell execution policy bypass patterns.
 
 ---
+### 🟠 [Threat Hunt: Suspected Data Exfiltration from PIP'd Employee](./cases/data-exfiltration-piped-employee.md)
 
-### 🟠 [Case Study: Brute Force Attack — NSG Hardening & Elimination](./cases/brute-force-nsg.md)
+**Type:** Threat Hunt → Incident Response
+**Environment:** Cyber Range Lab — Windows Azure VM
+**Tools:** KQL Microsoft Defender for Endpoint Log Analytics Workspaces
 
-**Type:** Detection + Remediation  
-**Environment:** Cyber Range Lab — Azure Windows VM  
-**Tools:** `Microsoft Sentinel` `KQL` `Azure NSG` `Defender for Endpoint`
-
-An Azure-hosted Windows VM was being hit with sustained brute force attacks over exposed RDP/SSH ports. Rather than just alerting on the activity, I eliminated the attack surface entirely.
+An employee placed on a Performance Improvement Plan (PIP) was flagged by management as a potential insider threat. The investigation focused on detecting data archiving, staging, and exfiltration activity on the employee's corporate device using MDE telemetry across file, process, and network logs.
 
 **Key findings:**
-- Direct internet exposure of management ports was the root cause
-- Sentinel logs showed hundreds of failed logon attempts from distributed IP ranges
-- After NSG rule changes blocking inbound internet traffic to management ports, brute force incidents dropped to zero
 
-**What I did:** Identified the exposure, implemented targeted inbound NSG rules, verified elimination of the attack vector through post-remediation log review.
+
+Discovered repeated .zip archive creation and file renaming activity in C:\ProgramData\backup\ consistent with data staging
+Identified exfiltratedata.ps1 script created on the device — a PowerShell script used to archive and exfiltrate employee data
+No confirmed network exfiltration detected across a 40-minute window around the suspicious activity
+Mapped to MITRE ATT&CK: T1059.001, T1560, T1074, T1041 (suspected), T1048 (suspected)
+
+
+**Outcome:** Findings reported to employee's manager. Device isolated pending further instructions. PowerShell hardening and DLP rules recommended.
 
 ---
 
