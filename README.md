@@ -83,22 +83,21 @@ During routine maintenance, a Windows VM in the shared services cluster was disc
 
 ---
 
-### 🔵 [Threat Hunt Lab: Tor Browser Usage](./cases/tor-browser-detection.md)
+### 🔴 [Threat Hunt: Zero-Day Ransomware (PwnCrypt) Outbreak](./cases/pwncrypt-ransomware.md)
 
-**Type:** Threat Hunt  
-**Environment:** Cyber Range Simulation  
-**Tools:** `KQL` `MDE` `Microsoft Azure` `Log Analytics Workspaces`
+**Type:** Threat Hunt → Incident Response  
+**Environment:** Cyber Range Lab — Windows Azure VM  
+**Tools:** `KQL` `Microsoft Defender for Endpoint` `Log Analytics Workspaces`
 
-**Hypothesis:** A user on the corporate network is using Tor Browser to bypass monitoring and access the internet anonymously.
+A new ransomware strain (PwnCrypt) was reported in the news using PowerShell and AES-256 encryption to target corporate files. The hunt used known IoCs to confirm active infection on a corporate endpoint, identifying 18 encrypted files across an 8-hour window — including EmployeeRecords, CompanyFinancials, and ProjectList data.
 
-Used KQL queries across Defender for Endpoint telemetry to identify process execution patterns consistent with Tor Browser usage. Confirmed unauthorized installation and usage, and documented the detection logic for use as a reusable hunt playbook.
+**Key findings:**
+- Confirmed PwnCrypt presence via `.pwncrypt` file rename and creation events in DeviceFileEvents
+- 18 files encrypted between 3:13 AM and 11:13 AM — 8-hour active window
+- High-sensitivity files targeted: employee records, financials, project data
+- Mapped to MITRE ATT&CK: T1059.001, T1486, T1105, T1562.001
 
-```kql
-// Sample detection logic — process name and known Tor browser path
-DeviceProcessEvents
-| where FileName =~ "firefox.exe"
-| where FolderPath contains "Tor Browser"
-| project Timestamp, DeviceName, AccountName, FolderPath, ProcessCommandLine
+**Outcome:** Device isolated. Clean backup restore recommended. Detection rule created for real-time `.pwncrypt` alerting. PowerShell hardening and user training flagged as critical gaps.
 ```
 
 ---
