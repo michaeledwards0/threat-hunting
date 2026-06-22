@@ -64,21 +64,22 @@ Mapped to MITRE ATT&CK: T1059.001, T1560, T1074, T1041 (suspected), T1048 (suspe
 
 ---
 
-### 🟡 [Case Study: Unhandled PowerShell Script Crash (Azure Guest Agent Degradation)](./cases/powershell-crash-azure-agent.md)
+### 🔵 [Threat Hunt: Devices Accidentally Exposed to the Internet — Brute Force Investigation](./cases/devices-exposed-internet.md)
 
-**Type:** Incident Response — False Positive Investigation  
-**Environment:** Cyber Range Incident Response  
-**Tools:** `KQL` `MDE` `Microsoft Azure` `Log Analytics Workspaces`
+**Type:** Threat Hunt → Incident Response  
+**Environment:** Cyber Range Lab — Windows Azure VM  
+**Tools:** `KQL` `Microsoft Defender for Endpoint` `Log Analytics Workspaces`
 
-A SYSTEM-level PowerShell script crash triggered a cascade of Azure Guest Agent failures — heartbeat degradation, extension timeouts, and Azure losing trust in the VM. The initial alert looked like a potential malicious script execution.
+During routine maintenance, a Windows VM in the shared services cluster was discovered to have been internet-facing for several days without authorization. The investigation focused on identifying brute force login attempts from external IPs and determining whether any unauthorized access had occurred.
 
 **Key findings:**
-- The crash originated from `pwncrypt.ps1` — a name that immediately flags as suspicious
-- Investigation revealed the exception was unhandled but non-malicious, triggering WERFault.exe
-- Azure Management Plane responded by restricting VM access and switching to health validation mode
-- No indicators of compromise found — this was platform behavior, not an attack
+- Device was internet-facing from `2026-02-01` through `2026-02-03` — over 48 hours of exposure
+- Multiple external IPs attempted failed network logons, with the top offender making 25 attempts
+- None of the attacking IPs achieved a successful logon
+- Only the `labuser0` account had successful logins — all from expected internal IPs with zero failed attempts, ruling out brute force
+- Mapped to MITRE ATT&CK: T1133, T1110, T1078, T1021
 
-**What I did:** Traced the full event chain across Management Plane and Data Plane logs, ruled out malicious activity, documented the Azure Guest Agent recovery behavior, and published the findings as a reference for future incident response tabletop exercises.
+**Outcome:** No unauthorized access confirmed. NSG hardened to restrict RDP to specific endpoints only. Account lockout policy implemented.
 
 ---
 
