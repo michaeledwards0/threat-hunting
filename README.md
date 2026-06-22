@@ -23,20 +23,26 @@ This page documents the threat hunting engagements and security operations work 
 
 ---
 
-### 🔴 [Case Study: Diicot (aka Mexals) Cryptominer Worm — Full-System Linux Compromise](./cases/diicot-cryptominer.md)
+### 🔴 Threat Hunt: Sudden Network Slowdowns — PowerShell LOLBin Investigation
 
-**Type:** Forensic Investigation + Incident Response  
-**Environment:** Cyber Range Lab — Linux VM  
-**Tools:** `KQL` `Microsoft Defender for Endpoint` `Log Analytics Workspaces`
+Type: Threat Hunt → Incident Response
 
-A root-level compromise of a Linux VM via SSH brute force, followed by installation of the Diicot cryptominer worm. This was a full end-to-end forensic investigation covering initial access, persistence mechanisms, payload staging, and cryptomining infrastructure.
+Environment: Cyber Range Lab — Windows Azure VM
 
-**Key findings:**
-- Attacker established immutable SSH key persistence to survive reboots and remediation attempts
-- Script-based payload staging was used to download and execute the miner without leaving obvious binaries
-- Network connections revealed active cryptomining pool infrastructure
+Tools: KQL Microsoft Defender for Endpoint Log Analytics Workspaces
 
-**What I did:** Traced the full attack chain from initial brute force event through payload execution, documented indicators of compromise, and built a detection rule in Defender for Endpoint to catch this TTPs pattern going forward.
+A Windows VM exposed to the internet began showing unusual network behavior — high volumes of failed outbound connections with no obvious cause. What started as a network slowdown investigation uncovered suspicious PowerShell execution chains consistent with Living-off-the-Land (LOLBin) attacker tradecraft.
+
+Key findings:
+
+
+182+ failed outbound connections from a single host, mostly on TCP 80/443 — not scanning behavior, but unusual volume
+Pivoted to process telemetry and found cmd.exe → powershell.exe chains with ExecutionPolicy Bypass flags
+Scripts including portscan.ps1 and staged payloads pulled from external URLs via Invoke-WebRequest
+Mapped to MITRE ATT&CK: T1059.001, T1562.001, T1105, T1046
+
+
+Outcome: No confirmed malware found on scan. Device isolated and flagged for reimaging. NSG rules hardened and detection rules created for PowerShell execution policy bypass patterns.
 
 ---
 
