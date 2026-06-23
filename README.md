@@ -98,7 +98,6 @@ A new ransomware strain (PwnCrypt) was reported in the news using PowerShell and
 - Mapped to MITRE ATT&CK: T1059.001, T1486, T1105, T1562.001
 
 **Outcome:** Device isolated. Clean backup restore recommended. Detection rule created for real-time `.pwncrypt` alerting. PowerShell hardening and user training flagged as critical gaps.
-```
 
 ---
 
