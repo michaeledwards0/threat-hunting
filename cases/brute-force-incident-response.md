@@ -61,7 +61,8 @@ DeviceLogonEvents
 
 The Sentinel rule generated an active incident flagged as **Medium severity**. The incident graph revealed connections from multiple external IPs to the affected VM (`ironman12`), along with several other VMs in the shared environment being targeted simultaneously.
 
-> 📸 *[Screenshot: Sentinel incident graph — ironman12 Brute Force Attempt Detection]*
+<img width="975" height="513" alt="image" src="https://github.com/user-attachments/assets/d3cc7242-2e55-4a90-8b55-69ed5b49f500" />
+
 
 **Attacking IP addresses identified:**
 
