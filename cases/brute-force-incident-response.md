@@ -33,7 +33,8 @@ DeviceLogonEvents
 | where FailedAttempts >= 10
 ```
 
->  *<img width="633" height="464" alt="image" src="https://github.com/user-attachments/assets/be7bd2c9-99df-4ca6-b64a-b62ddee01c4f" />* **![Uploading image.png…]()
+>  <img width="733" height="478" alt="image" src="https://github.com/user-attachments/assets/ff3cf6f8-42e3-4499-9467-38208a59f68a" />
+*<img width="633" height="464" alt="image" src="https://github.com/user-attachments/assets/be7bd2c9-99df-4ca6-b64a-b62ddee01c4f" />* 
 
 
 ---
