@@ -74,7 +74,6 @@ The Sentinel rule generated an active incident flagged as **Medium severity**. T
 | 148.251.140.16 | 31 | External — confirmed attacker |
 | 119.139.34.42 | 100 | External — most aggressive single source |
 
-> 📸 *[Screenshot: DeviceLogonEvents results showing failed attempts by RemoteIP]*
 
 **Notable finding:** `14.136.73.18` appeared against multiple VMs in the environment with exactly 40 failed attempts each — a pattern consistent with **automated scanning tools** methodically targeting every internet-exposed host rather than a targeted human-driven attack.
 
@@ -96,7 +95,7 @@ DeviceLogonEvents
 
 **Finding:** No results. **None of the attacking IPs achieved a successful logon.**
 
-> 📸 *[Screenshot: Query returning zero results for successful logons from attacking IPs]*
+<img width="1298" height="477" alt="image" src="https://github.com/user-attachments/assets/de35c60c-a447-4aaf-a930-4c167835dd8d" />
 
 ---
 
@@ -110,13 +109,14 @@ With brute force confirmed but no successful access detected, the priority shift
 
 **Device isolation in MDE** — isolated `ironman12` in Microsoft Defender for Endpoint to prevent any potential lateral movement while the investigation was completed and hardening was applied.
 
-> 📸 *[Screenshot: MDE device isolation confirmation]*
+<img width="975" height="508" alt="image" src="https://github.com/user-attachments/assets/791954dd-21a2-4752-aa64-dc23f638ec11" />
+
 
 ### Network Hardening
 
 **NSG lockdown** — updated the Network Security Group attached to the affected VM to block all inbound RDP traffic from the public internet. Access restricted to specific known IP ranges only.
 
-> 📸 *[Screenshot: NSG inbound rule — deny RDP from internet]*
+
 
 **Corporate policy proposal** — documented a recommendation to enforce this NSG configuration across all VMs in the environment going forward using **Azure Policy**. Azure Policy can automatically audit and remediate VMs that allow public RDP exposure, preventing this scenario from recurring as new VMs are deployed.
 
