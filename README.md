@@ -102,17 +102,21 @@ A new ransomware strain (PwnCrypt) was reported in the news using PowerShell and
 
 ---
 
-### 🟣 [Threat Hunt Lab: "IT Support" Recon Simulation](./cases/it-support-recon.md)
+### 🟠 [Incident Response: Brute Force Attack Detection & Containment](./cases/brute-force-incident-response.md)
 
-**Type:** Threat Hunt — Social Engineering TTPs  
-**Environment:** Cyber Range Simulation  
-**Tools:** `Microsoft Azure` `Log Analytics Workspaces` `KQL`
+**Type:** Incident Response  
+**Environment:** LOG(N) Pacific Cyber Range — Azure Windows VMs  
+**Tools:** `Microsoft Sentinel` `KQL` `Microsoft Defender for Endpoint` `Azure NSG`
 
-**Scenario:** An attacker poses as IT support to gain initial access, then performs staged reconnaissance before attempting exfiltration.
+A custom Sentinel scheduled query rule triggered on multiple VMs receiving sustained failed logon attempts from 5 distinct public IP addresses. The investigation confirmed a distributed brute force campaign targeting internet-exposed devices across the Cyber Range environment, with no successful unauthorized access achieved.
 
-Investigated a simulated social engineering attack chain. Used Azure telemetry to surface reconnaissance activity, egress testing, deception techniques, and persistence attempts that followed the initial access event.
+**Key findings:**
+- Detection rule fired on 10+ failed logons from the same remote IP within a 5-hour window
+- 5 external IPs confirmed as attacking sources across multiple VMs
+- Zero successful logons from any of the attacking IPs
+- Device isolated in MDE and NSG hardened to block public RDP access
 
-**What made this interesting:** The attacker's tradecraft was deliberate — slow, methodical, designed to blend in. Detecting it required correlating low-signal events across multiple log sources rather than relying on single high-fidelity alerts.
+**Outcome:** Threat contained. NSG lockdown applied. Azure Policy proposed to enforce NSG hardening across all VMs going forward.
 
 ---
 
