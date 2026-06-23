@@ -33,7 +33,8 @@ DeviceLogonEvents
 | where FailedAttempts >= 10
 ```
 
-> 📸 *[Screenshot: Sentinel analytics rule configuration]*
+>  *<img width="633" height="464" alt="image" src="https://github.com/user-attachments/assets/be7bd2c9-99df-4ca6-b64a-b62ddee01c4f" />* **![Uploading image.png…]()
+
 
 ---
 
