@@ -12,6 +12,8 @@
 A Microsoft Sentinel scheduled query rule was configured to detect PowerShell using `Invoke-WebRequest` to download remote content with execution policy restrictions bypassed. The rule fired on a monitored Windows endpoint, generating a high-severity incident requiring immediate investigation.
 
 > **Note:** The KQL query used a targeted device filter to scope results for this exercise. In a production environment, the rule would apply across all enrolled endpoints.
+> 
+<img width="870" height="565" alt="image" src="https://github.com/user-attachments/assets/00a8aa8b-d00b-45d0-8915-e76b3156793e" />
 
 ---
 
