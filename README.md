@@ -119,13 +119,13 @@ A custom Sentinel scheduled query rule triggered on multiple VMs receiving susta
 
 ---
 
-## Detection Engineering
+🔵## [PowerShell Suspicious Web Request & Multi-Stage Payload Delivery](./cases/powershell-suspicious-web-request/README.md)
 
-Beyond hunting, I built detection rules in Microsoft Defender for Endpoint to automate investigation and response for confirmed threat patterns:
+Severity: High  |  Tools: Microsoft Sentinel · Microsoft Defender for Endpoint · KQL · Azure Log Analytics
 
-- **Automated isolation rule** — triggered on confirmed cryptominer IoCs, isolating the host and initiating investigation workflow
-- **Brute force threshold alert** — custom Sentinel rule firing after N failed logon attempts from a single IP within a rolling window
-- **Tor browser execution alert** — process-based detection for known Tor browser file paths and execution patterns
+A Microsoft Sentinel scheduled query rule triggered a high-severity incident after detecting PowerShell executing Invoke-WebRequest with -ExecutionPolicy Bypass on an endpoint. Investigation revealed three malicious scripts were downloaded from a remote GitHub repository to C:\ProgramData\ — a port scanner, a ransomware simulation (pwncrypt), and an EICAR antivirus test payload. User interview and DeviceProcessEvents analysis confirmed execution. The device was isolated, an AV scan and backup restoration were performed, and a PowerShell execution policy restriction was implemented org-wide.
+
+Key skills demonstrated: Scheduled alert rule authoring · KQL process event analysis · User interview technique · Multi-payload triage · NIST 800-61 containment and post-incident response
 
 ---
 
