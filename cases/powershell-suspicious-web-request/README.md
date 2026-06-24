@@ -96,6 +96,9 @@ The affected user was contacted to establish context around the time the logs we
 
 `DeviceProcessEvents` confirmed multiple executions of `powershell.exe` with the `-ExecutionPolicy Bypass -File` parameter referencing all three scripts from `C:\ProgramData\`. This confirms the scripts were launched by PowerShell after being written to disk.
 
+<img width="975" height="469" alt="image" src="https://github.com/user-attachments/assets/a001b79f-16c6-4bc6-ac72-af12736d9e13" />
+
+
 > Additional investigation of `DeviceFileEvents` would be required to confirm whether the scripts completed execution and whether any downstream file modifications or network connections occurred.
 
 ---
@@ -106,6 +109,9 @@ The affected user was contacted to establish context around the time the logs we
 - **Initiated AV scan** on the isolated device to identify and quarantine any malicious artifacts
 - **Scripts escalated** to the malware reverse engineering team for static and dynamic analysis
 - **Restored device** from a known-good backup following confirmation of malicious activity
+
+<img width="711" height="437" alt="image" src="https://github.com/user-attachments/assets/f5ab6d59-0928-4a20-9dc7-257fbaf334b5" />
+
 
 ---
 
