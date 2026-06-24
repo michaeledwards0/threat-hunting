@@ -59,6 +59,9 @@ DeviceProcessEvents
 
 #### Malicious Commands Identified
 
+<img width="975" height="478" alt="image" src="https://github.com/user-attachments/assets/51d2a2e1-2db4-44d2-8b45-a307ec9057b4" />
+
+
 Three PowerShell commands were executed on the target device, each using `-ExecutionPolicy Bypass` to circumvent execution policy controls:
 
 ```powershell
