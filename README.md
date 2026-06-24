@@ -119,13 +119,21 @@ A custom Sentinel scheduled query rule triggered on multiple VMs receiving susta
 
 ---
 
-🔵## [PowerShell Suspicious Web Request & Multi-Stage Payload Delivery](./cases/powershell-suspicious-web-request/README.md)
+## [PowerShell Suspicious Web Request & Multi-Stage Payload Delivery](./cases/powershell-suspicious-web-request/README.md)
 
-Severity: High  |  Tools: Microsoft Sentinel · Microsoft Defender for Endpoint · KQL · Azure Log Analytics
+**Type:** Threat Detection & Response  
+**Environment:** LOG(N) Pacific Cyber Range — Azure Windows VMs  
+**Tools:** `Microsoft Sentinel` `KQL` `Microsoft Defender for Endpoint` `Azure Log Analytics`
 
-A Microsoft Sentinel scheduled query rule triggered a high-severity incident after detecting PowerShell executing Invoke-WebRequest with -ExecutionPolicy Bypass on an endpoint. Investigation revealed three malicious scripts were downloaded from a remote GitHub repository to C:\ProgramData\ — a port scanner, a ransomware simulation (pwncrypt), and an EICAR antivirus test payload. User interview and DeviceProcessEvents analysis confirmed execution. The device was isolated, an AV scan and backup restoration were performed, and a PowerShell execution policy restriction was implemented org-wide.
+A Microsoft Sentinel scheduled query rule triggered a high-severity incident after detecting PowerShell executing `Invoke-WebRequest` with `-ExecutionPolicy Bypass` on an endpoint. Investigation revealed three malicious scripts were downloaded from a remote GitHub repository to `C:\ProgramData\` — a port scanner, a ransomware simulation (pwncrypt), and an EICAR antivirus test payload. User interview and `DeviceProcessEvents` analysis confirmed execution.
 
-Key skills demonstrated: Scheduled alert rule authoring · KQL process event analysis · User interview technique · Multi-payload triage · NIST 800-61 containment and post-incident response
+**Key findings:**
+- PowerShell executed with `-ExecutionPolicy Bypass` to circumvent script restrictions
+- Three staged payloads downloaded: port scanner, ransomware simulation, EICAR AV probe
+- `C:\ProgramData\` used as drop directory — high-signal location for malicious file writes
+- Scripts escalated to malware reverse engineering team for analysis
+
+**Outcome:** Device isolated. Clean backup restore performed. PowerShell execution policy restriction implemented org-wide. User enrolled in mandatory security awareness training.
 
 ---
 
