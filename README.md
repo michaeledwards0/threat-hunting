@@ -137,32 +137,15 @@ A Microsoft Sentinel scheduled query rule triggered a high-severity incident aft
 
 ---
 
-## KQL Reference Queries
+## [Incident Response: Impossible Travel Detection & Identity Threat Analysis](./cases/impossible-travel-detection/README.md)
 
-A selection of queries used across these engagements:
+**Type:** Incident Response  
+**Environment:** LOG(N) Pacific Cyber Range — Azure / Microsoft Entra ID  
+**Tools:** `Microsoft Sentinel` `KQL` `Microsoft Defender for Endpoint` `Azure`
 
-```kql
-// Failed logon activity — brute force detection
-SecurityEvent
-| where EventID == 4625
-| summarize FailedAttempts = count() by IpAddress, bin(TimeGenerated, 1h)
-| where FailedAttempts > 50
-| order by FailedAttempts desc
+A Microsoft Sentinel analytics rule was configured to flag accounts exhibiting logon patterns across multiple geographic regions within a defined time window — a technique known as impossible travel detection. The rule triggered an incident surfacing 55 flagged accounts. Investigation focused on closely analyzing individual account logon sequences, timestamps, and source locations to determine whether any represented a credible authentication anomaly. No confirmed malicious activity was found in the reviewed accounts, but containment and response procedures were documented for true-positive scenarios, and a geo-fencing policy was proposed for implementation.
 
-// Process execution from suspicious path
-DeviceProcessEvents
-| where FolderPath has_any ("Temp", "AppData", "Downloads")
-| where FileName endswith ".ps1" or FileName endswith ".exe"
-| where InitiatingProcessFileName =~ "cmd.exe" or InitiatingProcessFileName =~ "powershell.exe"
-| project Timestamp, DeviceName, AccountName, FileName, FolderPath, ProcessCommandLine
-| order by Timestamp desc
-
-// Network connections to known cryptomining pools
-DeviceNetworkEvents
-| where RemotePort in (3333, 4444, 5555, 7777, 9999, 14444, 45560)
-| project Timestamp, DeviceName, RemoteIP, RemotePort, RemoteUrl
-| order by Timestamp desc
-```
+**Key skills demonstrated:** Sentinel analytics rule authoring · Identity threat investigation · Entra ID account analysis · KQL logon pattern analysis · Geographic anomaly detection · Policy-based prevention recommendations
 
 ---
 
