@@ -45,8 +45,6 @@ Detection logic was built around the business context that logins occurring from
 
 ### 2. Detection & Analysis
 
-The Sentinel analytics rule triggered an active incident. Upon investigation, **55 accounts** were flagged as exhibiting logon patterns that exceeded the defined geographic dispersion threshold.
-
 #### KQL Detection Logic
 
 ```kql
@@ -69,6 +67,8 @@ SigninLogs
 | project UserPrincipalName, IPAddress, City, PrevCity, CountryOrRegion, TimeDiff
 | order by TimeDiff asc
 ```
+The Sentinel analytics rule triggered an active incident. Upon investigation, **55 accounts** were flagged as exhibiting logon patterns that exceeded the defined geographic dispersion threshold.
+<img width="975" height="517" alt="image" src="https://github.com/user-attachments/assets/e643c5aa-9e27-4eb3-be94-7525cd4036fb" />
 
 #### Account Investigation
 
