@@ -70,6 +70,8 @@ DeviceProcessEvents
 | project Timestamp, DeviceName, AccountName, FileName, ProcessCommandLine, InitiatingProcessFileName
 | order by Timestamp asc
 ```
+<img width="1250" height="493" alt="image" src="https://github.com/user-attachments/assets/6d448eff-1bb4-4c10-a0d2-fb4b6959f460" />
+
 
 **Findings:** At **12:45 PM**, the installer was executed with the `/S` silent flag:
 
