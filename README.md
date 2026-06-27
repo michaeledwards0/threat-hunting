@@ -149,6 +149,18 @@ A Microsoft Sentinel analytics rule was configured to flag accounts exhibiting l
 
 ---
 
+## [Threat Hunt: Unauthorized TOR Browser Installation & Usage](./cases/threat-hunt-tor-usage/README.md)
+
+**Type:** Threat Hunt  
+**Environment:** LOG(N) Pacific Cyber Range — Azure Windows VMs  
+**Tools:** `Microsoft Defender for Endpoint` `KQL` `DeviceFileEvents` `DeviceProcessEvents` `DeviceNetworkEvents`
+
+Management flagged unusual encrypted traffic patterns and anonymous employee reports of attempts to bypass network controls. A proactive threat hunt was launched across endpoint telemetry to detect any TOR browser installation or usage. Investigation confirmed unauthorized TOR Browser installation via a silent installer on endpoint `bashphishing-vm`, active outbound connections to known TOR entry nodes over port 9001, and the creation of a file named `tor-shopping-list.txt` — elevating the incident beyond casual curiosity to deliberate, intentional misuse. The device was isolated and the user's manager was notified.
+
+**Key skills demonstrated:** Proactive threat hunting · IoC development · KQL cross-table correlation (FileEvents, ProcessEvents, NetworkEvents) · Silent installer detection · TOR network traffic analysis · Incident escalation
+
+---
+
 ## Lessons Learned
 
 **Alerts tell you something happened. Hunting tells you what it means.** Several of these cases started as noisy alert queues that required context and correlation to make sense of.
