@@ -88,10 +88,12 @@ The `/S` flag suppresses all installation prompts, indicating the user was delib
 ```kql
 DeviceNetworkEvents
 | where DeviceName == "bashphishing-vm"
-| where RemotePort in (9001, 9050, 9150)
-| project Timestamp, DeviceName, InitiatingProcessFileName, RemoteIP, RemotePort, ActionType
-| order by Timestamp asc
+| where InitiatingProcessAccountName != "system"
+| where RemotePort in ("9001", "9030", "9050", "9051", "9150")//common tor ports
+| project Timestamp, DeviceName, InitiatingProcessAccountName, ActionType, RemoteIP, RemotePort, RemoteUrl, InitiatingProcessFileName, InitiatingProcessFolderPath
+| order by Timestamp desc 
 ```
+<img width="1246" height="491" alt="image" src="https://github.com/user-attachments/assets/1f503d64-64e8-45a9-a2f5-eb4343dde0de" />
 
 **Findings:** At **12:47 PM**, `tor.exe` established successful outbound connections to known TOR entry nodes:
 
