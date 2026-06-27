@@ -52,6 +52,8 @@ DeviceFileEvents
 | project DeviceName, TimeGenerated, FileName, FolderPath, ActionType, InitiatingProcessFileName, SHA256
 | order by TimeGenerated desc
 ```
+<img width="1258" height="488" alt="image" src="https://github.com/user-attachments/assets/025a968f-c5f2-4d06-9b17-e72accc91c92" />
+
 
 **Findings:** The employee downloaded the TOR Browser portable installer (`tor-browser-windows-x86_64-portable-15.0.16.exe`) via Microsoft Edge to the Downloads folder. Multiple TOR-related files were subsequently extracted to `C:\Users\bashphishing\Desktop\Tor Browser\`, including `tor.exe`, `firefox.exe`, and pluggable transport tools `conjure-client.exe` and `lyrebird.exe` — tools specifically used to obfuscate TOR traffic from network inspection.
 
