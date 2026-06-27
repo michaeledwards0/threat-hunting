@@ -42,11 +42,15 @@ Before querying, a structured hypothesis-driven hunt plan was established target
 ### Step 1 — DeviceFileEvents: TOR File Activity
 
 ```kql
+let TimePeriodThreshold = timespan(7d);
 DeviceFileEvents
+| where TimeGenerated > ago(TimePeriodThreshold)
 | where DeviceName == "bashphishing-vm"
-| where FileName has_any ("tor", "firefox", "torbrowser")
-| project Timestamp, DeviceName, InitiatingProcessAccountName, ActionType, FileName, FolderPath
-| order by Timestamp asc
+| where FileName has_any ("tor", "tor.exe", "torbrowser", "firefox.exe")
+    or FolderPath has_any ("tor browser", "torbrowser", "onion")
+| where ActionType in ("FileCreated", "FileRenamed")
+| project DeviceName, TimeGenerated, FileName, FolderPath, ActionType, InitiatingProcessFileName, SHA256
+| order by TimeGenerated asc
 ```
 
 **Findings:** The employee downloaded the TOR Browser portable installer (`tor-browser-windows-x86_64-portable-15.0.16.exe`) via Microsoft Edge to the Downloads folder. Multiple TOR-related files were subsequently extracted to `C:\Users\bashphishing\Desktop\Tor Browser\`, including `tor.exe`, `firefox.exe`, and pluggable transport tools `conjure-client.exe` and `lyrebird.exe` — tools specifically used to obfuscate TOR traffic from network inspection.
